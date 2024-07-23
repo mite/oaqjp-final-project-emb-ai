@@ -16,4 +16,16 @@ def detect_emotion(text_to_analyse):
 
     response = requests.post(url, json=myobj, headers=headers, timeout=40)
     
-    return response.text
+    dic = json.loads(response.text)['emotionPredictions'][0]['emotion']
+    
+    val = 0
+    em = ''
+    for key in dic:
+        if val <= dic[key]:
+            em = key
+            val = dic[key]
+    dic['dominant_emotion'] = em
+    return dic
+
+    
+
