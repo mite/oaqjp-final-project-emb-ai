@@ -14,6 +14,9 @@ def sent_detect():
 
     response = detect_emotion(text_to_analyze)
 
+    if response["dominant_emotion"] == None:
+        return "<b>Invalid text! Please try again!"
+
     resp = f"For the give statement, the system response is 'anger' {response['anger']}, 'disgust': {response['disgust']}, 'fear': {response['fear']}, 'joy': {response['joy']} and 'sadness': {response['anger']}. The dominant emotion is <b>{response['dominant_emotion']}</b>."
 
     return resp
