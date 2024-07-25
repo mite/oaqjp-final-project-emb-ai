@@ -10,14 +10,21 @@ app = Flask("Emotion Detection")
 
 @app.route("/emotionDetector")
 def sent_detect():
+    ''' This function initiates the rendering of the emotion detection application
+        page over the Flask channel
+    '''
     text_to_analyze = request.args.get('textToAnalyze')
 
     response = detect_emotion(text_to_analyze)
 
-    if response["dominant_emotion"] == None:
+    if response["dominant_emotion"] is None:
         return "<b>Invalid text! Please try again!"
 
-    resp = f"For the give statement, the system response is 'anger' {response['anger']}, 'disgust': {response['disgust']}, 'fear': {response['fear']}, 'joy': {response['joy']} and 'sadness': {response['anger']}. The dominant emotion is <b>{response['dominant_emotion']}</b>."
+    resp = f"For the give statement, the system response is \
+    'anger' {response['anger']}, 'disgust': {response['disgust']}, \
+    'fear': {response['fear']}, 'joy': {response['joy']} and \
+    'sadness': {response['anger']}. The dominant emotion is \
+    <b>{response['dominant_emotion']}</b>."
 
     return resp
 
